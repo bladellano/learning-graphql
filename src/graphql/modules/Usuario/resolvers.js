@@ -29,17 +29,17 @@ module.exports = {
         usuarios: () => db,
     },
     Mutation: {
-        criarUsuario(_, args) {
-            const { email } = args;
+        criarUsuario(_, { data }) {
+            const { email } = data;
 
             const usuarioExistente = db.some(u => u.email === email);
 
             if (usuarioExistente) {
-                throw new Error(`Usuario existente: ${args.nome}`);
+                throw new Error(`Usuario existente: ${data.nome}`);
             }
 
             const novoUsuario = {
-                ...args,
+                ...data,
                 id: geradorDeId(db),
                 perfil: 2,
             };
@@ -47,6 +47,19 @@ module.exports = {
             db.push(novoUsuario);
             return novoUsuario;
         },
+        atualizarUsuario(_, { id, data }) {
+            const usuario = db.find(u => u.id === id);
+            const indice = db.findIndex(u => u.id === id);
+
+            const updateUsuario = {
+                ...usuario,
+                ...data
+            }
+
+            db.splice(indice, 1, updateUsuario);
+
+            return novoUsuario;
+        }
     },
 };
 
