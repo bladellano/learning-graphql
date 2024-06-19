@@ -58,7 +58,27 @@ module.exports = {
 
             db.splice(indice, 1, updateUsuario);
 
-            return novoUsuario;
+            return updateUsuario;
+        },
+        deletarUsuario(_, { filtro: { id, email } }) {
+
+            if (id) {
+                const usuarioEncontrado = db.find(u => u.id === id);
+                const indice = db.findIndex(u => u.id === id);
+                if (usuarioEncontrado)
+                    db.splice(indice, 1)
+
+                return !!usuarioEncontrado;
+            } else {
+                const usuarioEncontrado = db.find(u => u.email === email);
+                const indice = db.findIndex(u => u.email === email);
+                if (usuarioEncontrado)
+                    db.splice(indice, 1)
+
+                return !!usuarioEncontrado;
+            }
+
+
         }
     },
 };

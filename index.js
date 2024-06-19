@@ -8,6 +8,8 @@ const server = new ApolloServer({
         if (err.message.startsWith('Usuario existente:')) {
             return new Error(err.message);
         }
+
+        return err;
     }
 });
 
