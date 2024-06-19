@@ -1,9 +1,9 @@
-const { db, perfis } = require('../../../db')
+const { db, perfis } = require("../../../db");
 
 module.exports = {
-    Query: {
-        perfis() {
-            return perfis
-        }
-    }
-}
+  Query: {
+    perfis() {
+      return perfis;
+    },
+  },
+};
