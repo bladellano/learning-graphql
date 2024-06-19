@@ -3,6 +3,8 @@ module.exports = {
         {
             id: 1,
             nome: 'Paulo',
+            email: 'paulo@x.com.br',
+            telefone:'+351 927860522',
             salario_liquido: 500.15,
             ativo: false,
             idade: 23,
@@ -11,6 +13,8 @@ module.exports = {
         {
             id: 2,
             nome: 'Ana',
+            email: 'ana@x.com.br',
+            telefone:'+351 927860541',
             salario_liquido: 2000.25,
             ativo: true,
             idade: 34,

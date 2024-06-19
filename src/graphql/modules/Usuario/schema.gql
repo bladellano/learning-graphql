@@ -2,6 +2,8 @@ type Usuario {
   idade: String
   salario: Float
   nome: String
+  email: String
+  telefone: String
   ativo: Boolean
   id: ID
   perfil: Perfil
@@ -10,4 +12,8 @@ type Usuario {
 type Query {
   usuario(id: Int): Usuario
   usuarios: [Usuario]
+}
+
+type Mutation {
+  criarUsuario(nome: String, email: String, telefone: String): Usuario
 }

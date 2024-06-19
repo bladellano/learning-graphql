@@ -66,3 +66,21 @@ query pesquisaDeUsuario($id: Int, $comPerfil: Boolean!, $pular:Boolean!) {
   "pular": false
 }
 ```
+```
+query {
+  primeiroUsuario: usuario(id:1) {
+   id
+   ...camposUsuario
+  }
+
+  segundoUsuario: usuario(id:2) {
+   ...camposUsuario
+  }
+}
+
+fragment camposUsuario on Usuario{
+     nome idade perfil {
+      id descricao
+    }
+}
+```
