@@ -21,7 +21,7 @@ input FiltroInput {
 }
 
 type Query {
-  usuario(id: Int): Usuario
+  usuario(filtro: FiltroInput): Usuario
   usuarios: [Usuario]
 }
 

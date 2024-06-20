@@ -23,8 +23,12 @@ module.exports = {
         },
     },
     Query: {
-        usuario(_, args) {
-            return db.find((db) => db.id === args.id);
+        usuario(_, { filtro }) {
+            if (filtro.id) {
+                return db.find((db) => db.id === filtro.id);
+            } else {
+                return db.find((db) => db.email === filtro.email);
+            }
         },
         usuarios: () => db,
     },
@@ -61,26 +65,22 @@ module.exports = {
             return updateUsuario;
         },
         deletarUsuario(_, { filtro: { id, email } }) {
-
-            if (id) {
-                const usuarioEncontrado = db.find(u => u.id === id);
-                const indice = db.findIndex(u => u.id === id);
-                if (usuarioEncontrado)
-                    db.splice(indice, 1)
-
-                return !!usuarioEncontrado;
-            } else {
-                const usuarioEncontrado = db.find(u => u.email === email);
-                const indice = db.findIndex(u => u.email === email);
-                if (usuarioEncontrado)
-                    db.splice(indice, 1)
-
-                return !!usuarioEncontrado;
-            }
-
-
+            return deletarUsuarioFiltro(id ? { id } : { email });
         }
     },
 };
 
-// console.log(geradorDeId(db))
+function deletarUsuarioFiltro(filtro) {
+
+    const key = Object.keys(filtro)[0]
+    const value = Object.values(filtro)[0]
+
+    const indice = db.findIndex(u => u[key] === value);
+
+    const usuarioEncontrado = db.find(u => u[key] === value);
+
+    if (usuarioEncontrado)
+        db.splice(indice, 1)
+
+    return !!usuarioEncontrado; s
+}
